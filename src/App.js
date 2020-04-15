@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
+
 
 class App extends Component {
   constructor() {
@@ -47,10 +49,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      
-    }
-
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -64,23 +62,23 @@ class App extends Component {
       )
     }
 
-    const classes = [];
+    const assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push('red');
     } 
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push('bold');
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join( ' ')}>This is really working!</p>
-        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonHandler}>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button className={classes.button} alt={this.state.showPersons} onClick={this.togglePersonHandler}>
           Switch Name
-        </StyledButton>
+        </button>
         {persons}          
       </div>  
     );
