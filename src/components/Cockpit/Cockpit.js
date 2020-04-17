@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../containers/App.css';
+import classes from './Cockpit.css';
 
 const Cockpit = (props) => {
     const assignedClasses = [];
