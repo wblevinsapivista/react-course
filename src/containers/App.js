@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import classes from './App.css';
-import Person from './Person/Person';
-
+import Persons from '../components/Persons/Persons';
 
 class App extends Component {
   constructor() {
@@ -20,7 +19,7 @@ class App extends Component {
   
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((p) => {
-      return (p.id === id);
+      return (p.key === id);
     });
     
     const person = {
@@ -52,13 +51,8 @@ class App extends Component {
     let persons = null;
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person click={() => this.deletePersonHandler(index)} 
-              name={person.name} age={person.age}
-              changed={(event) => this.nameChangeHandler(event, person.id)}></Person>
-          })}
-        </div>
+        <Persons persons={this.state.persons} onNameChange={this.nameChangeHandler} 
+          onPersonClick={this.deletePersonHandler}></Persons>
       )
     }
 
