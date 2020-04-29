@@ -17,6 +17,7 @@ class App extends Component {
       { key: 3, name: 'Stephanie', age: 27 }
     ],
     otherState: 'some other value',
+    showCockpit: true
   };
   
   // note that getDerivedStateFromProps is a static method
@@ -72,6 +73,10 @@ class App extends Component {
     this.setState({persons: persons});
   }
 
+  removeCockpit() {
+
+  }
+
   render() {
     console.log('[App.js] render');
     
@@ -85,10 +90,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Cockpit title={this.props.appTitle} persons={this.state.persons} 
-          togglePersonHandler={this.togglePersonHandler}></Cockpit>
+        <button onClick={() => this.setState({showCockpit: false})}>Remove Cockpit</button>
+        {this.state.showCockpit === true ? <Cockpit title={this.props.appTitle} persons={this.state.persons} 
+          togglePersonHandler={this.togglePersonHandler}></Cockpit> : null }
         {persons}          
-      </div>  
+      </div>
+        
     );
   }
 }

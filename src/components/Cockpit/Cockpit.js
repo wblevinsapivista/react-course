@@ -9,8 +9,19 @@ const Cockpit = (props) => {
 
     setTimeout(() => {
       alert('saved data to cloud');
-    }, 1000)
+    }, 1000);
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    }
   }, []);  // the empty array makes this code only execute the first time
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect'); 
+    }
+  })
 
   if (props.persons.length <= 2) {
     assignedClasses.push('red');
