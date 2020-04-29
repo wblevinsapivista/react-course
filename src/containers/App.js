@@ -5,18 +5,43 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import classes from './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      persons: [
-        { key: 1, name: 'Max', age: 28 },
-        { key: 2, name: 'Manu', age: 29 },
-        { key: 3, name: 'Stephanie', age: 27 }
-      ],
-      otherState: 'some other value',
-    };
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
   }
+
+  state = {
+    persons: [
+      { key: 1, name: 'Max', age: 28 },
+      { key: 2, name: 'Manu', age: 29 },
+      { key: 3, name: 'Stephanie', age: 27 }
+    ],
+    otherState: 'some other value',
+  };
   
+  // note that getDerivedStateFromProps is a static method
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    
+    // this method should return the updated state
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+
+    
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
+
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((p) => {
       return (p.key === id);
@@ -48,6 +73,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
+    
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -58,7 +85,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Cockpit persons={this.state.persons} 
+        <Cockpit title={this.props.appTitle} persons={this.state.persons} 
           togglePersonHandler={this.togglePersonHandler}></Cockpit>
         {persons}          
       </div>  
